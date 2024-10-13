@@ -1,0 +1,6 @@
+[user]
+	name = mikukko
+	email = im.ifuo@outlook.com
+[push]
+	default = current
+	autoSetupRemote = true

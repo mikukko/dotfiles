@@ -3,12 +3,16 @@ alias python="python3"
 alias ll="ls -lahG"
 alias pip="pip3"
 alias ip="ipconfig getifaddr en0 && ipconfig getifaddr en1"
-alias ..="cd ../"
+alias grep="grep --color=auto"
+alias ..="cd .."
+alias ...="cd ../.."
 alias ~="cd ~"
 
 
 # export
 export HOMEBREW_NO_AUTO_UPDATE=1
+export M2_HOME=/usr/local/maven/apache-maven-3.9.9
+export PATH=$M2_HOME/bin:$PATH
 
 
 # plugin

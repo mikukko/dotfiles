@@ -29,6 +29,7 @@ source $(brew --prefix)/share/zsh-fast-syntax-highlighting/fast-syntax-highlight
 
 
 # eval
+eval "$(/opt/miniconda3/bin/conda shell.zsh hook)"
 
 
 # starship

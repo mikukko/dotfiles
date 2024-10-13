@@ -1,1 +1,3 @@
 # dotfiles
+
+Mac dotfiles config

@@ -34,6 +34,4 @@ set ruler
 "去除vi的一致性
 set nocompatible
 
-"允许用退格键删除字符
-set backspace=indent,eol,start
 

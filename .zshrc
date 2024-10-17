@@ -10,6 +10,7 @@ alias ~="cd ~"
 
 
 # export
+export HOMEBREW_PREFIX=$(brew --prefix)
 export HOMEBREW_NO_AUTO_UPDATE=1
 export M2_HOME=/usr/local/maven/apache-maven-3.9.9
 export PATH=$M2_HOME/bin:$PATH
@@ -17,15 +18,16 @@ export PATH=$M2_HOME/bin:$PATH
 
 # plugin
 plugins=(
-    git
     zsh-autosuggestions
     zsh-fast-syntax-highlighting
+    zsh-history-substring-search
 )
 
 
 # source
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 
 # eval

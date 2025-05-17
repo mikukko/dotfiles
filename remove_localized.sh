@@ -1,18 +1,27 @@
+#!/bin/bash
+
 directories=(
-  "~/Desktop"
-  "~/Documents"
-  "~/Downloads"
-  "~/Movies"
-  "~/Music"
-  "~/Pictures"
-  "~/Public"
-  "~/Applications"
+  "$HOME/Desktop"
+  "$HOME/Documents"
+  "$HOME/Downloads"
+  "$HOME/Movies"
+  "$HOME/Music"
+  "$HOME/Pictures"
+  "$HOME/Public"
+  "$HOME/Applications"
   "/Applications"
 )
 
 for dir in "${directories[@]}"; do
-  [[ -f "$dir/.localized" ]] && rm -f "$dir/.localized"
-  echo "removed $dir localized"
+  if [[ -f "${dir}/.localized" ]]; then
+    if rm -f "${dir}/.localized"; then
+      echo "Successfully removed ${dir}/.localized"
+    else
+      echo "Failed to remove ${dir}/.localized (permission issue?)" >&2
+    fi
+  else
+    echo "No .localized file found in ${dir}"
+  fi
 done
 
 killall Finder

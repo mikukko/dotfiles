@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # 定义 VS Code 相关的缓存和数据目录
-VSCODE_CACHED_DATA="~/Library/Application Support/Code/CachedData"
-VSCODE_CACHED_EXTENSIONS="~/Library/Application Support/Code/CachedExtensionVSIXs"
+VSCODE_CACHED_DATA="~/Library/Application\ Support/Code/CachedData"
+VSCODE_CACHED_EXTENSIONS="~/Library/Application\ Support/Code/CachedExtensionVSIXs"
 VSCODE_CACHE="~/Library/Caches/Code"
-VSCODE_USER_DATA="~/Library/Application Support/Code/User"
-VSCODE_WORKSPACE_STORAGE="~/Library/Application Support/Code/User/workspaceStorage"
+VSCODE_USER_DATA="~/Library/Application\ Support/Code/User"
+VSCODE_WORKSPACE_STORAGE="~/Library/Application\ Support/Code/User/workspaceStorage"
 
 # 提示用户即将开始清理
 echo "准备清理 VS Code 缓存和相关文件..."

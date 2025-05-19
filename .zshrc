@@ -12,16 +12,18 @@ alias ~="cd ~"
 # export
 export HOMEBREW_PREFIX=$(brew --prefix)
 export HOMEBREW_NO_AUTO_UPDATE=1
-export M2_HOME=/usr/local/maven/apache-maven-3.9.9
-export PATH=$M2_HOME/bin:$PATH
+
+export JAVA_HOME=/opt/homebrew/opt/openjdk
+export PATH=$JAVA_HOME/bin:$PATH
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 
 
-# plugin
-plugins=(
-    zsh-autosuggestions
-    zsh-fast-syntax-highlighting
-    zsh-history-substring-search
-)
+# completions
+FPATH="$HOME/.docker/completions:$FPATH"
+autoload -Uz compinit
+compinit
 
 
 # source
@@ -30,8 +32,9 @@ source $HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlight
 source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 
-# eval
-eval "$(/opt/miniconda3/bin/conda shell.zsh hook)"
+# pyenv
+eval "$(pyenv init --path)"
+eval "$(pyenv init - zsh)"
 
 
 # starship

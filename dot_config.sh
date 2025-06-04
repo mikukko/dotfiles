@@ -8,8 +8,9 @@ declare -a DOTFILES_TO_LINK=(
     ".zshrc ~/.zshrc"
     ".zprofile ~/.zprofile"
     ".vimrc ~/.vimrc"
+    ".condarc ~/.condarc"
     ".gitconfig ~/.gitconfig"
-    ".gitignore_global ~/.gitignore_global" # 更新：源文件和目标文件都使用 .gitignore_global
+    ".gitignore_global ~/.gitignore_global"
 )
 
 echo "开始链接 dotfiles (无备份模式)..."

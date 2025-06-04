@@ -1,5 +1,5 @@
 "显示行号
-set nu!
+"set nu!
 
 "语法高亮
 syntax on

@@ -11,6 +11,7 @@ declare -a DOTFILES_TO_LINK=(
     ".condarc ~/.condarc"
     ".gitconfig ~/.gitconfig"
     ".gitignore_global ~/.gitignore_global"
+    ".zsh_scripts ~/.zsh_scripts"
 )
 
 echo "开始链接 dotfiles (无备份模式)..."

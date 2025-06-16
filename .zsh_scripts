@@ -1,0 +1,35 @@
+# mkdir and cd
+function mcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Print Finder directory
+function pfd() {
+  osascript 2> /dev/null <<EOF
+  tell application "Finder"
+    return POSIX path of (target of window 1 as alias)
+  end tell
+EOF
+}
+
+# cd to Finder directory
+function cdf() {
+    cd "$(pfd)"
+}
+
+# Copy path to clipboard
+function copypath {
+  # If no argument passed, use current directory
+  local file="${1:-.}"
+
+  # If argument is not an absolute path, prepend $PWD
+  [[ $file = /* ]] || file="$PWD/$file"
+
+  # Copy the absolute path to clipboard using pbcopy
+  if print -n "${file:a}" | pbcopy; then
+    echo ${(%):-"%B${file:a}%b copied to clipboard."}
+  else
+    echo "Error: Failed to copy path to clipboard" >&2
+    return 1
+  fi
+}

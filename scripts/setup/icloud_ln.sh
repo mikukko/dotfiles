@@ -3,7 +3,7 @@
 # 源目录：iCloud Drive 的实际位置
 # 注意：路径中的空格需要正确处理，如果直接在命令中使用，需要转义空格 `\`
 # 或者将整个路径用引号括起来。在变量中赋值时，引号内的空格不需要额外转义。
-SOURCE_ICLOUD_DIR="/Users/miku/Library/Mobile Documents/com~apple~CloudDocs"
+SOURCE_ICLOUD_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 
 # 目标符号链接的路径 (~ 会被 shell 自动扩展为当前用户的主目录)
 TARGET_SYMLINK="${HOME}/iCloud" # 使用 ${HOME} 更明确

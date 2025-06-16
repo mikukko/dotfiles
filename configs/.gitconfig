@@ -5,4 +5,4 @@
 	default = current
 	autoSetupRemote = true
 [core]
-	excludesFile = /Users/miku/.gitignore_global
+	excludesFile = ~/.gitignore_global

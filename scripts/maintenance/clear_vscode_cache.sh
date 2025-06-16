@@ -8,12 +8,21 @@ PROCESS_NAME_FOR_KILL="Code"
 # --------------------
 
 # 定义 VS Code 相关的缓存和数据目录
-VSCODE_CACHED_DATA="$HOME/Library/Application Support/$PROCESS_NAME_FOR_KILL/CachedData"
-VSCODE_CACHED_EXTENSIONS="$HOME/Library/Application Support/$PROCESS_NAME_FOR_KILL/CachedExtensionVSIXs"
-# 主缓存目录，通常在 $HOME/Library/Caches/ 下，以进程名或应用标识命名
-VSCODE_MAIN_CACHE_DIR="$HOME/Library/Caches/$PROCESS_NAME_FOR_KILL"
-VSCODE_USER_DATA="$HOME/Library/Application Support/$PROCESS_NAME_FOR_KILL/User"
-VSCODE_WORKSPACE_STORAGE="$HOME/Library/Application Support/$PROCESS_NAME_FOR_KILL/User/workspaceStorage"
+VSCODE_APP_SUPPORT="$HOME/Library/Application Support/$PROCESS_NAME_FOR_KILL"
+VSCODE_CACHED_DATA="$VSCODE_APP_SUPPORT/CachedData"
+VSCODE_CACHED_EXTENSIONS="$VSCODE_APP_SUPPORT/CachedExtensionVSIXs"
+VSCODE_INTERNAL_CACHE="$VSCODE_APP_SUPPORT/Cache"
+VSCODE_CODE_CACHE="$VSCODE_APP_SUPPORT/Code Cache"
+VSCODE_GPU_CACHE="$VSCODE_APP_SUPPORT/GPUCache"
+VSCODE_LOGS="$VSCODE_APP_SUPPORT/logs"
+VSCODE_BACKUPS="$VSCODE_APP_SUPPORT/Backups"
+# 系统级缓存目录
+VSCODE_SYSTEM_CACHE="$HOME/Library/Caches/com.microsoft.VSCode"
+VSCODE_SHIPIT_CACHE="$HOME/Library/Caches/com.microsoft.VSCode.ShipIt"
+VSCODE_PROCESS_CACHE="$HOME/Library/Caches/$PROCESS_NAME_FOR_KILL"
+# 用户数据和工作区
+VSCODE_USER_DATA="$VSCODE_APP_SUPPORT/User"
+VSCODE_WORKSPACE_STORAGE="$VSCODE_APP_SUPPORT/User/workspaceStorage"
 
 # 提示用户即将开始清理
 echo "准备清理 VS Code ($APP_NAME_FOR_AS) 缓存和相关文件..."
@@ -127,16 +136,73 @@ else
   echo "扩展缓存目录不存在或已清理: $VSCODE_CACHED_EXTENSIONS"
 fi
 
-# 清理主缓存目录
-if [ -d "$VSCODE_MAIN_CACHE_DIR" ]; then
-  echo "清理主缓存: $VSCODE_MAIN_CACHE_DIR"
-  rm -rf "$VSCODE_MAIN_CACHE_DIR"
+# 清理内部缓存
+if [ -d "$VSCODE_INTERNAL_CACHE" ]; then
+  echo "清理内部缓存: $VSCODE_INTERNAL_CACHE"
+  rm -rf "$VSCODE_INTERNAL_CACHE"
 else
-  echo "主缓存目录不存在或已清理: $VSCODE_MAIN_CACHE_DIR"
-  # 提示: 如果此路径不正确 (例如，VS Code 使用 Bundle ID 作为 Caches 目录名，如 com.microsoft.VSCode)
-  # 您可能需要手动调整脚本中 VSCODE_MAIN_CACHE_DIR 的定义。
-  # 例如: VSCODE_MAIN_CACHE_DIR_ALT="$HOME/Library/Caches/com.microsoft.$PROCESS_NAME_FOR_KILL"
-  # if [ -d "$VSCODE_MAIN_CACHE_DIR_ALT" ]; then ... fi
+  echo "内部缓存目录不存在或已清理: $VSCODE_INTERNAL_CACHE"
+fi
+
+# 清理代码缓存
+if [ -d "$VSCODE_CODE_CACHE" ]; then
+  echo "清理代码缓存: $VSCODE_CODE_CACHE"
+  rm -rf "$VSCODE_CODE_CACHE"
+else
+  echo "代码缓存目录不存在或已清理: $VSCODE_CODE_CACHE"
+fi
+
+# 清理 GPU 缓存
+if [ -d "$VSCODE_GPU_CACHE" ]; then
+  echo "清理 GPU 缓存: $VSCODE_GPU_CACHE"
+  rm -rf "$VSCODE_GPU_CACHE"
+else
+  echo "GPU 缓存目录不存在或已清理: $VSCODE_GPU_CACHE"
+fi
+
+# 清理日志文件
+if [ -d "$VSCODE_LOGS" ]; then
+  echo "清理日志文件: $VSCODE_LOGS"
+  rm -rf "$VSCODE_LOGS"
+else
+  echo "日志目录不存在或已清理: $VSCODE_LOGS"
+fi
+
+# 清理系统级缓存目录
+if [ -d "$VSCODE_SYSTEM_CACHE" ]; then
+  echo "清理系统缓存: $VSCODE_SYSTEM_CACHE"
+  rm -rf "$VSCODE_SYSTEM_CACHE"
+else
+  echo "系统缓存目录不存在或已清理: $VSCODE_SYSTEM_CACHE"
+fi
+
+# 清理 ShipIt 缓存（更新相关）
+if [ -d "$VSCODE_SHIPIT_CACHE" ]; then
+  echo "清理更新缓存: $VSCODE_SHIPIT_CACHE"
+  rm -rf "$VSCODE_SHIPIT_CACHE"
+else
+  echo "更新缓存目录不存在或已清理: $VSCODE_SHIPIT_CACHE"
+fi
+
+# 清理进程名缓存目录（如果存在且不同于系统缓存）
+if [ -d "$VSCODE_PROCESS_CACHE" ] && [ "$VSCODE_PROCESS_CACHE" != "$VSCODE_SYSTEM_CACHE" ]; then
+  echo "清理进程缓存: $VSCODE_PROCESS_CACHE"
+  rm -rf "$VSCODE_PROCESS_CACHE"
+else
+  echo "进程缓存目录不存在或已清理: $VSCODE_PROCESS_CACHE"
+fi
+
+# 清理备份文件（可选）
+if [ -d "$VSCODE_BACKUPS" ]; then
+  read -p "是否要清理备份文件（包括未保存文件的自动备份）？(y/N): " answer
+  if [[ "$answer" == [Yy] ]]; then
+    echo "清理备份文件: $VSCODE_BACKUPS"
+    rm -rf "$VSCODE_BACKUPS"
+  else
+    echo "跳过备份文件清理。"
+  fi
+else
+  echo "备份文件目录不存在或已清理: $VSCODE_BACKUPS"
 fi
 
 # 清理用户数据（可选）
@@ -167,3 +233,16 @@ fi
 
 echo ""
 echo "清理完成！"
+echo ""
+echo "已清理的缓存类型："
+echo "✓ 缓存数据 (CachedData)"
+echo "✓ 扩展缓存 (CachedExtensionVSIXs)"
+echo "✓ 内部缓存 (Cache)"
+echo "✓ 代码缓存 (Code Cache)"
+echo "✓ GPU 缓存 (GPUCache)"
+echo "✓ 日志文件 (logs)"
+echo "✓ 系统缓存 (com.microsoft.VSCode)"
+echo "✓ 更新缓存 (ShipIt)"
+echo ""
+echo "注意：如果清理了用户数据或工作区存储，VS Code 将重置相关设置。"
+echo "建议重启 VS Code 以确保清理生效。"

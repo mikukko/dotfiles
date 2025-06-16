@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 源目录：iCloud Drive 中的 Rime 配置文件夹
-SOURCE_RIME_CONFIG_DIR="/Users/miku/Library/Mobile Documents/com~apple~CloudDocs/Rime"
+SOURCE_RIME_CONFIG_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Rime"
 
 # 目标父目录，我们将在其中创建符号链接
 TARGET_PARENT_DIR="${HOME}/Library"

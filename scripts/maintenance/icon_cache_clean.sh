@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # 停止图标服务代理，防止在删除时它又写入新缓存
 killall iconservicesagent
 

@@ -40,10 +40,6 @@ setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
 # 忽略以空格开头的命令
 setopt HIST_IGNORE_SPACE
-# 自动纠正命令
-setopt CORRECT
-# 自动纠正参数
-setopt CORRECT_ALL
 
 # ============================================================================
 # 2. 历史记录配置 (History Configuration)

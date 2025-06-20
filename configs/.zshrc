@@ -120,7 +120,7 @@ export LC_ALL="en_US.UTF-8"
 
 # 添加补全路径
 FPATH="$HOMEBREW_PREFIX/share/zsh-completions:${FPATH}"
-
+FPATH="$HOME/.docker/completions:${FPATH}"
 autoload -Uz compinit
 compinit -C
 

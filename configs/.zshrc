@@ -106,6 +106,10 @@ export PATH=$JAVA_HOME/bin:$PATH
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
+# pnpm
+export PNPM_HOME="$HOME/.pnpm-global"
+export PATH="$PNPM_HOME:$PATH"
+
 # 编辑器设置
 export EDITOR="vim"
 export VISUAL="$EDITOR"

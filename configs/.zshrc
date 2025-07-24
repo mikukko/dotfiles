@@ -99,7 +99,7 @@ fi
 export HOMEBREW_NO_AUTO_UPDATE=1
 
 # Java 环境配置
-export JAVA_HOME=/opt/homebrew/opt/openjdk
+export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH=$JAVA_HOME/bin:$PATH
 
 # Python 环境配置

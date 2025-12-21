@@ -167,3 +167,6 @@ eval "$(starship init zsh)"
 # 配置文件结束
 # ============================================================================
 
+
+# Added by Antigravity
+export PATH="/Users/miku/.antigravity/antigravity/bin:$PATH"

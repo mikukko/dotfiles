@@ -118,6 +118,9 @@ export VISUAL="$EDITOR"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
+# Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+
 # ============================================================================
 # 5. 补全系统 (Completion System)
 # ============================================================================
@@ -166,7 +169,3 @@ eval "$(starship init zsh)"
 # ============================================================================
 # 配置文件结束
 # ============================================================================
-
-
-# Added by Antigravity
-export PATH="/Users/miku/.antigravity/antigravity/bin:$PATH"

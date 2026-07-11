@@ -42,13 +42,7 @@ dotfiles/
 
 已有配置会暂存到 `$TMPDIR/dotfiles-install.*`。安装成功后立即删除临时文件；安装失败时自动恢复原配置。正确的符号链接会直接跳过，如果目标是目录则拒绝删除。
 
-Git 用户名和邮箱不放入仓库，请在 `~/.gitconfig.local` 中单独配置：
-
-```gitconfig
-[user]
-    name = Your Name
-    email = your.email@example.com
-```
+Git 提交使用 GitHub noreply 邮箱，可以保留 GitHub 账号关联，同时不公开真实邮箱。
 
 ### 参数
 

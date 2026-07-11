@@ -1,5 +1,5 @@
 "显示行号
-"set nu!
+set nu!
 
 "语法高亮
 syntax on
@@ -34,4 +34,8 @@ set ruler
 "去除vi的一致性
 set nocompatible
 
-
+"大文件优化
+augroup LargeFileOptimize
+  autocmd!
+  autocmd BufReadPre * if getfsize(expand('%')) > 10000 | syntax off | endif
+augroup END

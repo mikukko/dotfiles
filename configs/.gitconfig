@@ -1,6 +1,5 @@
-[user]
-	name = mikukko
-	email = im.ifuo@outlook.com
+[include]
+	path = ~/.gitconfig.local
 [push]
 	default = current
 	autoSetupRemote = true

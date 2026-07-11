@@ -39,3 +39,5 @@ build/
 *.egg-info/
 .coverage
 .pytest_cache/
+
+**/.claude/settings.local.json

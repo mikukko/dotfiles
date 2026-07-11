@@ -1,0 +1,6 @@
+brew "fish"
+brew "pyenv"
+brew "starship"
+brew "zsh-autosuggestions"
+brew "zsh-fast-syntax-highlighting"
+brew "zsh-history-substring-search"

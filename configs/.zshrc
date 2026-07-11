@@ -92,15 +92,17 @@ alias ports="lsof -i -P -n | grep LISTEN"
 # 4. 环境变量 (Environment Variables)
 # ============================================================================
 
-# Homebrew 配置 - 缓存路径以提高性能
-if [[ -z "$HOMEBREW_PREFIX" ]]; then
-    export HOMEBREW_PREFIX=$(brew --prefix)
+# Homebrew 配置
+if [[ -z "${HOMEBREW_PREFIX:-}" ]] && command -v brew >/dev/null 2>&1; then
+    export HOMEBREW_PREFIX="$(brew --prefix)"
 fi
 export HOMEBREW_NO_AUTO_UPDATE=1
 
 # Java 环境配置
-export JAVA_HOME=$(/usr/libexec/java_home)
-export PATH=$JAVA_HOME/bin:$PATH
+if [[ -x /usr/libexec/java_home ]]; then
+    JAVA_HOME="$(/usr/libexec/java_home 2>/dev/null)" || unset JAVA_HOME
+    [[ -n "${JAVA_HOME:-}" ]] && export JAVA_HOME && export PATH="$JAVA_HOME/bin:$PATH"
+fi
 
 # Python 环境配置
 export PYENV_ROOT="$HOME/.pyenv"
@@ -126,8 +128,8 @@ export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 # ============================================================================
 
 # 添加补全路径
-FPATH="$HOMEBREW_PREFIX/share/zsh-completions:${FPATH}"
-FPATH="$HOME/.docker/completions:${FPATH}"
+[[ -n "${HOMEBREW_PREFIX:-}" ]] && FPATH="$HOMEBREW_PREFIX/share/zsh-completions:${FPATH}"
+[[ -d "$HOME/.docker/completions" ]] && FPATH="$HOME/.docker/completions:${FPATH}"
 autoload -Uz compinit
 compinit -C
 
@@ -142,16 +144,19 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # 注意：语法高亮插件必须最后加载，以避免与补全系统冲突
 
 # 自定义函数和脚本
-source $HOME/.zsh_scripts
+[[ -r "$HOME/.zsh_scripts" ]] && source "$HOME/.zsh_scripts"
 
 # 自动建议插件 - 提供命令建议
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -r "${HOMEBREW_PREFIX:-}/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
+    source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # 历史搜索插件 - 支持历史子字符串搜索
-source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+[[ -r "${HOMEBREW_PREFIX:-}/share/zsh-history-substring-search/zsh-history-substring-search.zsh" ]] && \
+    source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 # 语法高亮插件 - 在compinit之后加载
-source $HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+[[ -r "${HOMEBREW_PREFIX:-}/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ]] && \
+    source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
 # ============================================================================
 # 7. 工具初始化 (Tools Initialization)
@@ -163,7 +168,9 @@ if command -v pyenv >/dev/null 2>&1; then
 fi
 
 # 提示符主题 - 放在最后初始化
-eval "$(starship init zsh)"
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init zsh)"
+fi
 
 
 # ============================================================================

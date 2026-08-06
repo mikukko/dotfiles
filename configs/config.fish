@@ -16,7 +16,6 @@ set -gx LC_ALL en_US.UTF-8
 
 fish_add_path "$PYENV_ROOT/bin"
 fish_add_path "$PNPM_HOME"
-fish_add_path "$HOME/.antigravity/antigravity/bin"
 
 if test -x /usr/libexec/java_home
     set -l java_home (/usr/libexec/java_home 2>/dev/null)

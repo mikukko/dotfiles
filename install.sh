@@ -211,6 +211,14 @@ link_config "configs/.gitignore_global" ".gitignore_global"
 run_optional "$WITH_ICLOUD" "link_icloud.sh"
 run_optional "$WITH_OBSIDIAN" "link_obsidian.sh"
 
+info "Installing the folder-localization guard"
+if command -v cc >/dev/null 2>&1; then
+    run "$SCRIPT_DIR/scripts/localized_guard.sh"
+else
+    warn "cc not found; skipping the folder-localization guard."
+    warn "Install Xcode Command Line Tools first, then run: ./scripts/localized_guard.sh"
+fi
+
 if ! command -v brew >/dev/null 2>&1; then
     warn "Homebrew is not installed; optional shell tools will be skipped by the configs."
 elif [[ -f "$SCRIPT_DIR/Brewfile" ]]; then
